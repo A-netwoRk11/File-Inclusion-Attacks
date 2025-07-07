@@ -1,0 +1,219 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Input Validation Demo - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>✅ Input Validation Demo</h1>
+    <div class="alert alert-info" style="background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460;">
+        <strong>🧪 Interactive Testing:</strong> Test different validation methods with various inputs.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🎛️ Validation Tester</h2>
+    <form method="GET" style="margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+            <label for="type" style="font-weight: bold;">Validation Type:</label>
+            <select id="type" name="type" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="basic" {% if validation_type == 'basic' %}selected{% endif %}>🔍 Basic Pattern Matching</option>
+                <option value="advanced" {% if validation_type == 'advanced' %}selected{% endif %}>🧠 Advanced Regex Validation</option>
+                <option value="whitelist" {% if validation_type == 'whitelist' %}selected{% endif %}>📋 Whitelist Character Filtering</option>
+            </select>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;">
+            <label for="input" style="font-weight: bold;">Test Input:</label>
+            <input type="text" 
+                   id="input" 
+                   name="input" 
+                   placeholder="Enter text to validate..." 
+                   value="{{ input_text }}"
+                   style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            <button type="submit" class="btn">🧪 Test</button>
+        </div>
+    </form>
+</div>
+
+{% if input_text %}
+<div class="hero">
+    <h2>📊 Validation Result</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1rem;">
+        <div>
+            <h3>📥 Input:</h3>
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace;">{{ input_text }}</div>
+        </div>
+        
+        <div>
+            <h3>🎯 Validation Method:</h3>
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+                {% if validation_type == 'basic' %}
+                    🔍 Basic Pattern Matching
+                {% elif validation_type == 'advanced' %}
+                    🧠 Advanced Regex Validation
+                {% elif validation_type == 'whitelist' %}
+                    📋 Whitelist Character Filtering
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin: 2rem 0;">
+        {% if blocked %}
+            <div style="background-color: #f8d7da; padding: 2rem; border-radius: 10px; border: 1px solid #f5c6cb;">
+                <h2 style="color: #721c24; margin: 0;">🚫 BLOCKED</h2>
+                <p style="color: #721c24; font-size: 1.2rem; margin: 1rem 0;">{{ result }}</p>
+            </div>
+        {% else %}
+            <div style="background-color: #d4edda; padding: 2rem; border-radius: 10px; border: 1px solid #c3e6cb;">
+                <h2 style="color: #155724; margin: 0;">✅ ALLOWED</h2>
+                <p style="color: #155724; font-size: 1.2rem; margin: 1rem 0;">{{ result }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+<div class="hero">
+    <h2>🧪 Test Cases</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>✅ Safe Inputs</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem; font-family: monospace;">
+                <li>sample.txt</li>
+                <li>document.pdf</li>
+                <li>image_001.jpg</li>
+                <li>user-data.csv</li>
+                <li>config_backup.json</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>⚠️ Directory Traversal</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem; font-family: monospace;">
+                <li>../../../etc/passwd</li>
+                <li>..\\..\\..\\windows\\system.ini</li>
+                <li>....//....//etc/hosts</li>
+                <li>..%2F..%2F..%2Fetc%2Fpasswd</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+            <h3>🚨 Malicious Inputs</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem; font-family: monospace;">
+                <li>http://evil.com/shell.php</li>
+                <li>javascript:alert(1)</li>
+                <li>&lt;script&gt;alert('xss')&lt;/script&gt;</li>
+                <li>'; DROP TABLE users; --</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Validation Methods Explained</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔍 Basic Pattern Matching</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <p><strong>How it works:</strong> Looks for simple dangerous patterns in the input.</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Basic validation checks
+if '../' in input_text or '..\' in input_text:
+    return "BLOCKED: Directory traversal detected"
+elif input_text.startswith(('http://', 'https://', 'ftp://')):
+    return "BLOCKED: URL detected"
+else:
+    return "ALLOWED: Input appears safe"</code></pre>
+            <p><strong>Pros:</strong> Simple, fast, catches obvious attacks</p>
+            <p><strong>Cons:</strong> Easy to bypass with encoding or variations</p>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🧠 Advanced Regex Validation</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <p><strong>How it works:</strong> Uses regular expressions to detect complex attack patterns.</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Advanced regex patterns
+dangerous_patterns = [
+    r'\.\.[\\/]',           # Directory traversal
+    r'[a-zA-Z]+:\/\/',      # URLs (http, ftp, etc.)
+    r'[<>"\']',             # HTML/SQL injection chars
+    r'[\x00-\x1f\x7f-\x9f]', # Control characters
+]
+
+for pattern in dangerous_patterns:
+    if re.search(pattern, input_text):
+        return f"BLOCKED: Dangerous pattern detected: {pattern}"</code></pre>
+            <p><strong>Pros:</strong> More flexible, catches encoded attacks</p>
+            <p><strong>Cons:</strong> Complex to maintain, performance impact</p>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>📋 Whitelist Character Filtering</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <p><strong>How it works:</strong> Only allows specific characters, blocks everything else.</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Whitelist approach
+allowed_chars = set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-')
+
+if all(c in allowed_chars for c in input_text):
+    return "ALLOWED: Input contains only whitelisted characters"
+else:
+    return "BLOCKED: Input contains non-whitelisted characters"</code></pre>
+            <p><strong>Pros:</strong> Most secure, very hard to bypass</p>
+            <p><strong>Cons:</strong> May be too restrictive for some use cases</p>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>💡 Best Practices</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>🎯 Defense in Depth</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>Multiple validation layers</li>
+                <li>Server-side validation (never trust client)</li>
+                <li>Database-level constraints</li>
+                <li>Application-level controls</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>🔄 Continuous Improvement</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>Regular security testing</li>
+                <li>Monitor for new attack patterns</li>
+                <li>Update validation rules</li>
+                <li>Learn from security incidents</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📊 Performance Considerations</h2>
+    
+    <div style="background-color: #fff3cd; padding: 1rem; border-radius: 5px; border: 1px solid #ffeaa7;">
+        <h3>⚡ Optimization Tips</h3>
+        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+            <li><strong>Cache validation results</strong> for repeated inputs</li>
+            <li><strong>Use compiled regex patterns</strong> for better performance</li>
+            <li><strong>Implement rate limiting</strong> to prevent abuse</li>
+            <li><strong>Log validation attempts</strong> for monitoring</li>
+            <li><strong>Use asynchronous validation</strong> for heavy operations</li>
+        </ul>
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'defense_mechanisms' %}" class="btn">← Defense Mechanisms</a>
+    <a href="{% url 'vulnerability_demo' %}" class="btn">Back to Demos</a>
+    <a href="{% url 'security_logs' %}" class="btn">Next: Security Logs →</a>
+</div>
+{% endblock %}

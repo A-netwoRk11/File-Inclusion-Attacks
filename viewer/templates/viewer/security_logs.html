@@ -1,0 +1,231 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Security Logs - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>📊 Security Logs</h1>
+    <div class="alert alert-info" style="background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460;">
+        <strong>📈 Real-time Monitoring:</strong> Track all security events and attack attempts in real-time.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Log Analysis</h2>
+    
+    {% if logs %}
+        <div style="margin-bottom: 1rem;">
+            <p><strong>📊 Total Events:</strong> {{ logs|length }}</p>
+            <p><strong>🕒 Last Updated:</strong> <span id="current-time"></span></p>
+        </div>
+        
+        <div style="background-color: #f8f9fa; border-radius: 5px; border: 1px solid #ddd; max-height: 600px; overflow-y: auto;">
+            <div style="padding: 1rem; border-bottom: 1px solid #ddd; background-color: #343a40; color: white; font-weight: bold;">
+                🖥️ Security Event Log
+            </div>
+            {% for log in logs %}
+                <div style="padding: 0.75rem; border-bottom: 1px solid #eee; font-family: monospace; font-size: 0.9rem; 
+                    {% if 'WARNING' in log %}background-color: #fff3cd;{% elif 'CRITICAL' in log %}background-color: #f8d7da;{% elif 'ERROR' in log %}background-color: #f8d7da;{% else %}background-color: white;{% endif %}">
+                    
+                    {% if 'CRITICAL' in log %}
+                        🚨 {{ log|safe }}
+                    {% elif 'ERROR' in log %}
+                        ❌ {{ log|safe }}
+                    {% elif 'WARNING' in log %}
+                        ⚠️ {{ log|safe }}
+                    {% else %}
+                        ℹ️ {{ log|safe }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 3rem; background-color: #f8f9fa; border-radius: 5px; border: 1px solid #ddd;">
+            <h3>📝 No Security Events Yet</h3>
+            <p>Start testing the vulnerability demos to see security events appear here.</p>
+            <div style="margin: 1rem 0;">
+                <a href="{% url 'lfi_demo' %}" class="btn">🧪 Try LFI Demo</a>
+                <a href="{% url 'rfi_demo' %}" class="btn">🧪 Try RFI Demo</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<div class="hero">
+    <h2>📈 Security Metrics</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #d4edda; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #c3e6cb;">
+            <h3 style="margin: 0; color: #155724;">✅ Blocked Attacks</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #155724; margin: 0.5rem 0;" id="blocked-count">
+                {% if logs %}
+                    {{ logs|length }}
+                {% else %}
+                    0
+                {% endif %}
+            </div>
+            <small style="color: #155724;">Total security events logged</small>
+        </div>
+        
+        <div style="background-color: #fff3cd; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #ffeaa7;">
+            <h3 style="margin: 0; color: #856404;">⚠️ Warnings</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #856404; margin: 0.5rem 0;" id="warning-count">
+                {% if logs %}
+                    {% with warning_count=0 %}
+                        {% for log in logs %}
+                            {% if 'WARNING' in log %}
+                                {% with warning_count=warning_count|add:1 %}{% endwith %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ warning_count }}
+                    {% endwith %}
+                {% else %}
+                    0
+                {% endif %}
+            </div>
+            <small style="color: #856404;">Suspicious activities detected</small>
+        </div>
+        
+        <div style="background-color: #f8d7da; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #f5c6cb;">
+            <h3 style="margin: 0; color: #721c24;">🚨 Critical</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #721c24; margin: 0.5rem 0;" id="critical-count">
+                {% if logs %}
+                    {% with critical_count=0 %}
+                        {% for log in logs %}
+                            {% if 'CRITICAL' in log %}
+                                {% with critical_count=critical_count|add:1 %}{% endwith %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ critical_count }}
+                    {% endwith %}
+                {% else %}
+                    0
+                {% endif %}
+            </div>
+            <small style="color: #721c24;">High-severity threats</small>
+        </div>
+        
+        <div style="background-color: #d1ecf1; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #bee5eb;">
+            <h3 style="margin: 0; color: #0c5460;">📊 Monitoring</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #0c5460; margin: 0.5rem 0;">🟢</div>
+            <small style="color: #0c5460;">System status: Active</small>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Log Analysis Tips</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>📋 What to Look For</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><strong>Repeated attacks</strong> from same IP</li>
+                <li><strong>Directory traversal attempts</strong> (../)</li>
+                <li><strong>URL inclusion attempts</strong> (http://)</li>
+                <li><strong>Unusual file access patterns</strong></li>
+                <li><strong>Failed authentication attempts</strong></li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>🚨 Response Actions</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li><strong>Block malicious IPs</strong></li>
+                <li><strong>Update WAF rules</strong></li>
+                <li><strong>Patch vulnerabilities</strong></li>
+                <li><strong>Increase monitoring</strong></li>
+                <li><strong>Notify security team</strong></li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>⚙️ Log Configuration</h2>
+    
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+        <h3>📊 Current Logging Settings</h3>
+        <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Python Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'security': {
+            'format': '%(asctime)s - %(levelname)s - %(message)s'
+        },
+    },
+    'handlers': {
+        'security_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'security.log',
+            'formatter': 'security',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'security',
+        },
+    },
+    'loggers': {
+        'security': {
+            'handlers': ['security_file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}</code></pre>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔄 Auto-Refresh</h2>
+    <div style="text-align: center;">
+        <button onclick="refreshLogs()" class="btn">🔄 Refresh Logs</button>
+        <button onclick="toggleAutoRefresh()" class="btn" id="auto-refresh-btn">▶️ Enable Auto-Refresh</button>
+    </div>
+</div>
+
+<script>
+let autoRefreshEnabled = false;
+let refreshInterval;
+
+function updateCurrentTime() {
+    document.getElementById('current-time').textContent = new Date().toLocaleString();
+}
+
+function refreshLogs() {
+    window.location.reload();
+}
+
+function toggleAutoRefresh() {
+    const btn = document.getElementById('auto-refresh-btn');
+    if (autoRefreshEnabled) {
+        clearInterval(refreshInterval);
+        btn.textContent = '▶️ Enable Auto-Refresh';
+        btn.style.backgroundColor = '#667eea';
+        autoRefreshEnabled = false;
+    } else {
+        refreshInterval = setInterval(refreshLogs, 10000); // Refresh every 10 seconds
+        btn.textContent = '⏸️ Disable Auto-Refresh';
+        btn.style.backgroundColor = '#28a745';
+        autoRefreshEnabled = true;
+    }
+}
+
+// Update time every second
+setInterval(updateCurrentTime, 1000);
+updateCurrentTime();
+</script>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'input_validation_demo' %}" class="btn">← Input Validation</a>
+    <a href="{% url 'vulnerability_demo' %}" class="btn">Back to Demos</a>
+    <a href="{% url 'home' %}" class="btn">Home →</a>
+</div>
+{% endblock %}

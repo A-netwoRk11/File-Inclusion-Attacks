@@ -1,0 +1,189 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Secure File Handling Demo - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🔒 Secure File Handling Demo</h1>
+    <div class="alert alert-success" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724;">
+        <strong>✅ Best Practices Implementation:</strong> This demonstrates secure alternatives to direct file path manipulation.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🎛️ Secure Access Methods</h2>
+    <form method="GET" style="margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+            <label for="method" style="font-weight: bold;">Security Method:</label>
+            <select id="method" name="method" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;" onchange="updateFileOptions()">
+                <option value="whitelist" {% if method == 'whitelist' %}selected{% endif %}>📋 Whitelist Approach</option>
+                <option value="switch_case" {% if method == 'switch_case' %}selected{% endif %}>🔀 Switch/Case Pattern</option>
+                <option value="category_based" {% if method == 'category_based' %}selected{% endif %}>📁 Category-Based Access</option>
+            </select>
+        </div>
+        
+        {% if method == 'category_based' %}
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+            <label for="category" style="font-weight: bold;">File Category:</label>
+            <select id="category" name="category" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                {% for cat_name, cat_files in file_categories.items %}
+                    <option value="{{ cat_name }}" {% if request.GET.category == cat_name %}selected{% endif %}>{{ cat_name|title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        
+        <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center;">
+            <label for="file_id" style="font-weight: bold;">File ID:</label>
+            <select id="file_id" name="file_id" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="">Select a file...</option>
+                {% for file_id, file_info in allowed_files.items %}
+                    <option value="{{ file_id }}" {% if file_id == request.GET.file_id %}selected{% endif %}>
+                        {{ file_id }} - {{ file_info.title }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn">🔍 Access File</button>
+        </div>
+    </form>
+</div>
+
+{% if error %}
+<div class="hero">
+    <div class="alert alert-danger">
+        <strong>❌ Access Denied:</strong> {{ error }}
+    </div>
+</div>
+{% endif %}
+
+{% if success and content %}
+<div class="hero">
+    <h2>📄 File Content: {{ file_info.title }}</h2>
+    <div style="margin-bottom: 1rem;">
+        <p><strong>Description:</strong> {{ file_info.description }}</p>
+        <p><strong>Method Used:</strong> 
+            {% if method == 'whitelist' %}📋 Whitelist Approach{% elif method == 'switch_case' %}🔀 Switch/Case Pattern{% elif method == 'category_based' %}📁 Category-Based Access ({{ category|title }}){% endif %}
+        </p>
+    </div>
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace; white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto;">{{ content }}</div>
+</div>
+{% endif %}
+
+<div class="hero">
+    <h2>🛡️ Security Method Comparison</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>📋 Whitelist Approach</h3>
+            <p><strong>Most Secure:</strong> Only predefined files are accessible</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># Define allowed files
+ALLOWED_FILES = {
+    'welcome': 'sample.txt',
+    'config': 'config.txt'
+}
+
+if file_id in ALLOWED_FILES:
+    filepath = ALLOWED_FILES[file_id]
+else:
+    raise SecurityError("File not allowed")</code></pre>
+            <p><strong>✅ Pros:</strong> Maximum security, no path manipulation possible</p>
+            <p><strong>⚠️ Cons:</strong> Requires manual file registration</p>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>🔀 Switch/Case Pattern</h3>
+            <p><strong>Structured:</strong> Predefined logic paths for each file</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># Switch-case pattern
+if file_id == 'welcome':
+    filepath = 'files/sample.txt'
+elif file_id == 'config':
+    filepath = 'files/config.txt'
+else:
+    raise SecurityError("Invalid file ID")</code></pre>
+            <p><strong>✅ Pros:</strong> Clear logic flow, easy to audit</p>
+            <p><strong>⚠️ Cons:</strong> Code grows with each new file</p>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>📁 Category-Based Access</h3>
+            <p><strong>Organized:</strong> Files grouped by function/permission</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># Category-based access
+CATEGORIES = {
+    'docs': ['readme', 'help'],
+    'config': ['settings', 'database']
+}
+
+if category in CATEGORIES and file_id in CATEGORIES[category]:
+    # Access allowed
+    filepath = get_file_path(file_id)</code></pre>
+            <p><strong>✅ Pros:</strong> Scalable, role-based access possible</p>
+            <p><strong>⚠️ Cons:</strong> More complex implementation</p>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🚫 What NOT to Do</h2>
+    
+    <div style="background-color: #f8d7da; padding: 1rem; border-radius: 5px; border: 1px solid #f5c6cb;">
+        <h3>❌ Dangerous Practices to Avoid</h3>
+        
+        <div style="margin: 1rem 0;">
+            <h4>🔴 Direct User Input in File Paths</h4>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px;"><code># NEVER DO THIS
+filename = request.GET['file']  # User can input anything!
+filepath = f"files/{filename}"  # Directory traversal possible
+with open(filepath, 'r') as f:
+    content = f.read()</code></pre>
+        </div>
+        
+        <div style="margin: 1rem 0;">
+            <h4>🔴 Cookie/Header-Based File Selection</h4>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px;"><code># AVOID THIS
+filename = request.COOKIES.get('selected_file')  # Manipulable
+filename = request.META.get('HTTP_X_FILE')       # User controlled
+filepath = f"templates/{filename}"               # Security risk</code></pre>
+        </div>
+        
+        <div style="margin: 1rem 0;">
+            <h4>🔴 Dynamic Path Construction</h4>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px;"><code># DANGEROUS
+base_path = "files/"
+user_path = request.POST['path']
+full_path = base_path + user_path  # Path traversal risk
+include(full_path)                 # Code execution possible</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Available Files</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        {% for file_id, file_info in allowed_files.items %}
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h4>{{ file_id }}</h4>
+            <p><strong>{{ file_info.title }}</strong></p>
+            <p>{{ file_info.description }}</p>
+            <a href="?method={{ method }}&file_id={{ file_id }}" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">📖 Access</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function updateFileOptions() {
+    const method = document.getElementById('method').value;
+    const fileSelect = document.getElementById('file_id');
+    
+    // You can add JavaScript logic here to filter files based on method
+    // For now, all files are available for all methods
+}
+</script>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'vulnerability_demo' %}" class="btn">← Back to Demos</a>
+    <a href="{% url 'advanced_security_demo' %}" class="btn">Advanced Security →</a>
+</div>
+{% endblock %}

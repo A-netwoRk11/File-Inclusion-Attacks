@@ -1,0 +1,81 @@
+{% extends 'viewer/base.html' %}
+
+{% block content %}
+<div class="hero">
+    <h1>🚨 File Inclusion Attacks: Understanding the Threat</h1>
+    <div class="alert alert-warning">
+        <strong>⚠️ Educational Purpose Only:</strong> This demonstration is designed for learning about web security vulnerabilities. Do not use these techniques on systems you don't own or without explicit permission.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>What are File Inclusion Attacks?</h2>
+    <p>File inclusion attacks are a type of web application vulnerability that occurs when an application allows user input to determine which files are included or executed. These attacks can lead to serious security breaches, including:</p>
+    
+    <ul style="margin: 1rem 0; padding-left: 2rem;">
+        <li><strong>Local File Inclusion (LFI):</strong> Accessing files on the web server</li>
+        <li><strong>Remote File Inclusion (RFI):</strong> Including files from remote servers</li>
+        <li><strong>Directory Traversal:</strong> Navigating outside intended directories</li>
+    </ul>
+</div>
+
+<div class="hero">
+    <h2>🎯 Common Attack Scenarios</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 1rem 0;">
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+            <h3>📂 Sensitive File Access</h3>
+            <p>Attackers can access system files like <code>/etc/passwd</code>, configuration files, or application source code containing credentials.</p>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>🌐 Remote Code Execution</h3>
+            <p>Through RFI, attackers can execute malicious code by including remote files, potentially taking complete control of the server.</p>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>📋 Information Disclosure</h3>
+            <p>Unauthorized access to log files, database configurations, or user data can lead to massive data breaches.</p>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🛡️ Prevention Strategies</h2>
+    <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+        <h3>✅ Best Practices:</h3>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>Input Validation:</strong> Validate and sanitize all user inputs</li>
+            <li><strong>Whitelist Approach:</strong> Only allow specific, predefined files</li>
+            <li><strong>Path Sanitization:</strong> Use <code>realpath()</code> and check if the resolved path is within allowed directories</li>
+            <li><strong>Disable Remote Includes:</strong> Turn off <code>allow_url_include</code> in PHP</li>
+            <li><strong>Use Security Headers:</strong> Implement proper Content Security Policy (CSP)</li>
+            <li><strong>Regular Security Audits:</strong> Perform code reviews and penetration testing</li>
+        </ul>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🧪 Try the Demo</h2>
+    <div class="alert alert-danger">
+        <strong>⚠️ Warning:</strong> The vulnerable version is currently disabled for safety. This demo shows the secure implementation.
+    </div>
+    
+    <p>Use the demonstrations below to understand how file inclusion works and see the difference between vulnerable and secure implementations:</p>
+    
+    <div style="margin: 1rem 0;">
+        <a href="{% url 'vulnerability_demo' %}" class="btn">🎯 Vulnerability Demos</a>
+        <a href="{% url 'view_file' %}" class="btn">🔍 Simple File Viewer</a>
+    </div>
+    
+    <h3>Sample Files Available:</h3>
+    <ul style="margin: 1rem 0; padding-left: 2rem;">
+        <li><code>sample.txt</code> - Basic text file</li>
+        <li><code>config.txt</code> - Simulated configuration file with sensitive data</li>
+        <li><code>application.log</code> - Application log file</li>
+        <li><code>users.csv</code> - Simulated user database</li>
+        <li><code>../manage.py</code> - Try directory traversal (blocked in secure version)</li>
+        <li><code>../../etc/passwd</code> - System file access attempt (blocked)</li>
+    </ul>
+</div>
+
+{% endblock %}

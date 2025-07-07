@@ -1,0 +1,71 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}File Viewer - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>📁 File Viewer</h1>
+    <div class="alert alert-warning">
+        <strong>⚠️ Security Notice:</strong> This is the secure version of the file viewer. The vulnerable version is commented out in the code for educational purposes.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔍 View File Content</h2>
+    <form method="GET" style="margin-bottom: 2rem;">
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <label for="file" style="font-weight: bold;">Enter filename:</label>
+            <input type="text" 
+                   id="file" 
+                   name="file" 
+                   placeholder="e.g., sample.txt" 
+                   value="{{ request.GET.file }}"
+                   style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            <button type="submit" class="btn">📖 View File</button>
+        </div>
+    </form>
+    
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+        <h3>💡 Test Examples:</h3>
+        <ul style="margin: 0.5rem 0; padding-left: 2rem;">
+            <li><code>sample.txt</code> - Valid file in allowed directory</li>
+            <li><code>../manage.py</code> - Directory traversal attempt (blocked)</li>
+            <li><code>../../etc/passwd</code> - System file access (blocked)</li>
+            <li><code>../../../windows/system32/drivers/etc/hosts</code> - Windows system file (blocked)</li>
+        </ul>
+    </div>
+</div>
+
+{% if error %}
+<div class="hero">
+    <div class="alert alert-danger">
+        <strong>❌ Error:</strong> {{ error }}
+    </div>
+</div>
+{% endif %}
+
+{% if content %}
+<div class="hero">
+    <h2>📄 File Content{% if filename %}: {{ filename }}{% endif %}</h2>
+    <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd; font-family: monospace; white-space: pre-wrap; overflow-x: auto;">{{ content }}</div>
+</div>
+{% endif %}
+
+<div class="hero">
+    <h2>🔒 Security Implementation</h2>
+    <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+        <h3>✅ Current Security Measures:</h3>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>Path Validation:</strong> Using <code>os.path.abspath()</code> to resolve paths</li>
+            <li><strong>Directory Restriction:</strong> Checking if resolved path starts with allowed base path</li>
+            <li><strong>File Existence Check:</strong> Verifying file exists before reading</li>
+            <li><strong>Error Handling:</strong> Proper error messages without information disclosure</li>
+        </ul>
+    </div>
+    
+    <div style="background-color: #f8d7da; padding: 1rem; border-radius: 5px; border: 1px solid #f5c6cb; margin-top: 1rem;">
+        <h3>⚠️ Vulnerable Code (Disabled):</h3>
+        <p>The vulnerable version would directly concatenate user input with file paths, allowing directory traversal attacks. Check the source code to see the commented vulnerable implementation.</p>
+    </div>
+</div>
+{% endblock %}

