@@ -1,0 +1,12 @@
+# User Database (Simulated)
+# This represents sensitive user data that should never be accessible
+
+user_id,username,email,password_hash,role,created_date
+1001,admin,admin@company.com,$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LeM,admin,2024-01-01
+1002,john_doe,john@email.com,$2b$12$GRLvWZNQMFfGPxQ8XPJyNu.3rT5mK8dF,user,2024-02-15
+1003,jane_smith,jane@email.com,$2b$12$TGHyUIOPmnbVcxzASDFgh.45tY6nM9kL,user,2024-03-10
+1004,guest_user,guest@temp.com,$2b$12$VBNMqwertyUIOP.123456789,guest,2024-04-20
+1005,support,support@company.com,$2b$12$HJKLzxcvbnmPOI.987654321,support,2024-05-01
+
+# Password hashes are bcrypt encrypted
+# Admin credentials should never be exposed like this!

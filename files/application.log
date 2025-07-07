@@ -1,0 +1,10 @@
+[2025-01-15 10:30:22] INFO: User login successful - user_id: 1001, ip: 192.168.1.100
+[2025-01-15 10:35:45] WARNING: Failed login attempt - username: admin, ip: 192.168.1.250
+[2025-01-15 10:36:01] WARNING: Failed login attempt - username: root, ip: 192.168.1.250
+[2025-01-15 10:36:15] ERROR: Multiple failed login attempts detected - ip: 192.168.1.250
+[2025-01-15 11:15:33] INFO: Database backup completed successfully
+[2025-01-15 11:45:22] DEBUG: SQL Query executed: SELECT * FROM users WHERE id = 1001
+[2025-01-15 12:00:11] INFO: Payment processed - amount: $299.99, card: ****1234
+[2025-01-15 12:30:55] ERROR: Database connection timeout - retrying...
+[2025-01-15 13:15:44] WARNING: Suspicious file upload detected - filename: shell.php
+[2025-01-15 14:22:33] INFO: System backup initiated by admin user

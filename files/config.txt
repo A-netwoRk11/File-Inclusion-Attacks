@@ -1,0 +1,16 @@
+# Configuration File
+# This is a simulated configuration file that might contain sensitive information
+
+DATABASE_URL=postgresql://user:password123@localhost:5432/myapp
+SECRET_KEY=super-secret-key-12345
+API_KEY=sk-1234567890abcdef
+DEBUG=True
+
+# Email Settings
+EMAIL_HOST=smtp.gmail.com
+EMAIL_USER=admin@company.com
+EMAIL_PASS=email_password_123
+
+# Third Party Services
+AWS_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
+AWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
