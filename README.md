@@ -22,8 +22,6 @@ pip install -r requirements.txt
 
 ### Method 1: Using the Enhanced Main Entry Point (Recommended)
 ```bash
-cd "d:\ra1111\Project\File Inclusion Attacks"
-
 # Complete setup (first time only)
 python main.py setup
 
