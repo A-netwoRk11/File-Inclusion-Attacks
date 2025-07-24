@@ -13,47 +13,47 @@
 2025-07-06 13:58:32,464 - INFO - Watching for file changes with StatReloader
 2025-07-06 13:59:04,349 - INFO - LFI attempt - IP: 127.0.0.1, Mode: secure, File: ./manage.py
 2025-07-06 13:59:06,487 - INFO - LFI attempt - IP: 127.0.0.1, Mode: secure, File: ./manage.py
-2025-07-06 14:00:14,073 - INFO - LFI attempt - IP: 127.0.0.1, Mode: secure, File: D:\ra1111\Project\File Inclusion Attacks\fileInclusion_demo
-2025-07-06 14:00:14,073 - WARNING - Directory traversal blocked - IP: 127.0.0.1, File: D:\ra1111\Project\File Inclusion Attacks\fileInclusion_demo
-2025-07-06 14:00:21,255 - INFO - LFI attempt - IP: 127.0.0.1, Mode: vulnerable, File: D:\ra1111\Project\File Inclusion Attacks\fileInclusion_demo
+2025-07-06 14:00:14,073 - INFO - LFI attempt - IP: 127.0.0.1, Mode: secure, File: [SYSTEM FILE PATH]\fileInclusion_demo
+2025-07-06 14:00:14,073 - WARNING - Directory traversal blocked - IP: 127.0.0.1, File: [SYSTEM FILE PATH]\fileInclusion_demo
+2025-07-06 14:00:21,255 - INFO - LFI attempt - IP: 127.0.0.1, Mode: vulnerable, File: [SYSTEM FILE PATH]\fileInclusion_demo
 2025-07-06 14:00:42,726 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
     template = get_template(template_name, using=using)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: viewer/rfi_demo.html
 2025-07-06 14:00:50,581 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
     template = get_template(template_name, using=using)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: viewer/rfi_demo.html
 2025-07-06 14:01:51,517 - INFO - Input validation test - IP: 127.0.0.1, Type: basic, Input: evil.com
@@ -78,673 +78,675 @@ django.template.exceptions.TemplateDoesNotExist: viewer/rfi_demo.html
 2025-07-06 14:04:56,329 - INFO - Secure file access - IP: 127.0.0.1, Method: switch_case, File ID: welcome
 2025-07-06 14:10:25,533 - INFO - Watching for file changes with StatReloader
 2025-07-06 14:10:40,052 - WARNING - Not Found: /lfi
-2025-07-06 14:11:23,527 - INFO - D:\ra1111\Project\File Inclusion Attacks\viewer\urls.py changed, reloading.
+2025-07-06 14:11:23,527 - INFO - [SYSTEM FILE PATH]\viewer\urls.py changed, reloading.
 2025-07-06 14:11:24,327 - INFO - Watching for file changes with StatReloader
 2025-07-06 14:11:32,195 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
     template = get_template(template_name, using=using)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: viewer/rfi_demo.html
 2025-07-06 14:11:51,386 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
     template = get_template(template_name, using=using)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: viewer/rfi_demo.html
-2025-07-06 14:12:02,166 - INFO - D:\ra1111\Project\File Inclusion Attacks\viewer\urls.py changed, reloading.
+2025-07-06 14:12:02,166 - INFO - [SYSTEM FILE PATH]\viewer\urls.py changed, reloading.
 2025-07-06 14:12:03,044 - INFO - Watching for file changes with StatReloader
 2025-07-06 14:14:14,428 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:14:55,442 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:15:18,126 - WARNING - Not Found: /lfi
 2025-07-06 14:15:21,759 - WARNING - Not Found: /lfi
 2025-07-06 14:20:03,494 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:20:41,480 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:20:43,109 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:23:09,108 - INFO - Watching for file changes with StatReloader
 2025-07-06 14:23:32,162 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:23:49,081 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:23:54,194 - ERROR - Internal Server Error: /demo/rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:26:17,186 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 14:26:48,703 - ERROR - Internal Server Error: /rfi/
 Traceback (most recent call last):
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
     response = wrapped_callback(request, *callback_args, **callback_kwargs)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\viewer\views.py", line 105, in rfi_demo
+  File "[SYSTEM FILE PATH]\viewer\views.py", line 105, in rfi_demo
     return render(request, "viewer/rfi_demo.html", context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
     content = loader.render_to_string(template_name, context, request, using=using)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
     return template.render(context, request)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
     return self.template.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 171, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 171, in render
     return self._render(context)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
     return compiled_parent._render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 163, in _render
     return self.nodelist.render(context)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
     result = block.nodelist.render(context)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 1016, in render
     return SafeString("".join([node.render_annotated(context) for node in self]))
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
     return self.render(context)
            ^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
     url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
     resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ra1111\Project\File Inclusion Attacks\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+  File "[SYSTEM FILE PATH]\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'demo_hub' not found. 'demo_hub' is not a valid view function or pattern name.
 2025-07-06 23:32:12,327 - INFO - Watching for file changes with StatReloader
 2025-07-06 23:32:15,901 - WARNING - Not Found: /favicon.ico
 2025-07-06 23:33:55,003 - WARNING - Not Found: /favicon.ico
+2025-07-24 12:09:36,412 - WARNING - Not Found: /favicon.ico
+2025-07-24 12:12:32,182 - WARNING - Not Found: /logs
