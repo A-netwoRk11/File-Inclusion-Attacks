@@ -14,6 +14,9 @@
 
 Install dependencies:
 ```bash
+python.exe -m pip install --upgrade pip
+```
+```bash
 pip install -r requirements.txt
 ```
 
